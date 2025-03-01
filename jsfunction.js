@@ -6,6 +6,16 @@ function showName() {
 
 }
 
+// named expression function 
+const myVariable = function myFunction() {
+    console.log( "One second elapsed." );
+    setTimeout( myFunction, 1000 );
+}
+
+// myVariable();
+
+setTimeout(myVariable, 500);
+
 // Nested function
 function showAge() {
     function showDob() {
@@ -42,6 +52,33 @@ showUserNames( " - ", "Theik ", "Chan" );
 
 // arrow function
 
+const myArrowFunction = () => {};
+
+// arrow function with one parameter
+const oneFunction = oneParameter => {};
+
+const singleExpression = () => 2 + 2
+
+function myParentFunction() {
+    this.myProperty = true;
+    let myFunction = () => {
+        // arrow function don't have it own context for arguments or this and inherit from nearest enclosing function
+        console.log( this );
+    }
+    myFunction();
+}
+
+let myInstance = new myParentFunction(); // will print Object { myProperty: true }
+
+
+function myOtherParentFunction() {
+    // arrow function don't bind argment like other function and inherit argument object from closet function 
+    let myArrowFunction = () => {
+        console.log( arguments[0] );
+    }
+    myArrowFunction( true );
+}
+
 function showNames( ) {
     let myArrowFunction = ( ...params ) => {
         console.log( params[ 0 ] );
@@ -50,3 +87,27 @@ function showNames( ) {
 }
 
 showNames( false );
+
+// IIFE = Immediately Invoded Function Expression called immediately when it defined
+
+// group function expression = option 1
+
+(
+function () {
+    console.log( "IIFE" );
+}
+)();
+
+// function declaration inside grouping operators  option 2
+(
+    function () {
+        console.log( "IIFE" );
+    }()
+);
+
+// Arrow IIFE function
+( 
+    () => {
+        console.log( "IIFE" );
+    }
+)();
