@@ -111,3 +111,51 @@ function () {
         console.log( "IIFE" );
     }
 )();
+
+// New function
+// calling function with new keyword create new object
+//  constructor function with first charactor capitalize
+function MyNewFunction() { 
+    // this refer to newly created object when calling this function with new keyword
+    this.myProperty = true;
+}
+
+const myNewObject = new MyNewFunction();
+myNewObject.myProperty; // true 
+
+
+function MyNewArgumentFunction( myArgument )
+{
+    this.myValue = myArgument;
+    this.doubleMyValue = () => myArgument * 2;
+}
+const myArgumentObject = new MyNewArgumentFunction( 10 );
+myArgumentObject.myValue; // 10
+myArgumentObject.doubleMyValue(); // 20
+
+
+// global binding 
+function GlobalBindingFunction() 
+{
+    console.log( this );
+}
+
+const globalObject = new GlobalBindingFunction();
+
+GlobalBindingFunction(); // global this binding outside of strict mode is globalThis
+
+(
+    function() {
+        "use strict";
+        function MyFunction() {
+            console.log( this );
+    }
+    MyFunction(); // global this binding insider strict mode is undefined
+}());
+
+// factory function
+function myFactoryFunction( myArgument = false ) {
+    return { "myProperty" : myArgument };
+}
+
+const myFactoryObject = myFactoryFunction( true ); // myFacotryObject { myProperty: true }
